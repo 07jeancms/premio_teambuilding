@@ -1,33 +1,34 @@
 <?php
 
-function sinetiks_schools_list() {
+function premio_products_list() {
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/sinetiks-schools/style-admin.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/premio-products/style-admin.css" rel="stylesheet" />
     <div class="wrap">
-        <h2>Schools</h2>
+        <h2>Products</h2>
         <div class="tablenav top">
             <div class="alignleft actions">
-                <a href="<?php echo admin_url('admin.php?page=sinetiks_schools_create'); ?>">Add New</a>
+                <a href="<?php echo admin_url('admin.php?page=premio_products_create'); ?>">Add New</a>
             </div>
             <br class="clear">
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "school";
+        $table_name = $wpdb->prefix . "premio_product";
 
-        $rows = $wpdb->get_results("SELECT id,name from $table_name");
+        $rows = $wpdb->get_results("SELECT product_id, name from $table_name");
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
                 <th class="manage-column ss-list-width">ID</th>
                 <th class="manage-column ss-list-width">Name</th>
+                <th class="manage-column ss-list-width">Action</th>
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->id; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $row->product_id; ?></td>
                     <td class="manage-column ss-list-width"><?php echo $row->name; ?></td>
-                    <td><a href="<?php echo admin_url('admin.php?page=sinetiks_schools_update&id=' . $row->id); ?>">Update</a></td>
+                    <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&id=' . $row->product_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
         </table>
