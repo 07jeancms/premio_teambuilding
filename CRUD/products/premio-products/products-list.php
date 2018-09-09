@@ -20,7 +20,7 @@ function premio_products_list() {
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
                 <th class="manage-column ss-list-width">ID</th>
-                <th class="manage-column ss-list-width">Name</th>
+                <th class="manage-column ss-list-width">Product</th>
                 <th class="manage-column ss-list-width">Action</th>
                 <th>&nbsp;</th>
             </tr>
