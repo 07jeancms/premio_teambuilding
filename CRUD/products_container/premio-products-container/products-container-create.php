@@ -22,7 +22,7 @@ function premio_products_container_create() {
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <table class='wp-list-table widefat fixed'>
                 <tr>
-                    <th class="ss-th-width">Product Container</th>
+                    <th class="ss-th-width">Container name</th>
                     <td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width" /></td>
                 </tr>
             </table>
