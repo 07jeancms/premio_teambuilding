@@ -15,9 +15,9 @@ function premio_products_create() {
         $message.="Product inserted";
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/premio-products/style-admin.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo plugins_url(); ?>/premio-products/style-admin.css" rel="stylesheet" />
     <div class="wrap">
-        <h2>Add New Product</h2>
+        <h2 class="testJC">Add New Product</h2>
         <?php if (isset($message)): ?><div class="updated"><p><?php echo $message; ?></p></div><?php endif; ?>
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <table class='wp-list-table widefat fixed'>

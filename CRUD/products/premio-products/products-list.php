@@ -2,7 +2,7 @@
 
 function premio_products_list() {
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/premio-products/style-admin.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo plugins_url(); ?>/premio-products/style-admin.css" rel="stylesheet" />
     <div class="wrap">
         <h2>Products</h2>
         <div class="tablenav top">
