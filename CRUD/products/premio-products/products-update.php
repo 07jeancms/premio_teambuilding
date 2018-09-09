@@ -5,20 +5,21 @@ function premio_products_update() {
     $table_name = $wpdb->prefix . "premio_product";
     $product_id = $_GET["product_id"];
     $name = $_POST["name"];
-    //update
+//update
     if (isset($_POST['update'])) {
         $wpdb->update(
                 $table_name, //table
                 array('name' => $name), //data
+                array('product_id' => $product_id), //where
+                array('%s'), //data format
                 array('%s') //where format
         );
     }
-    //delete
+//delete
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE product_id = %s", $product_id));
-    } else {
-        //selecting value to update	
-        $products = $wpdb->get_results($wpdb->prepare("SELECT product_id, name from $table_name where product_id=%s", $product_id));
+    } else {//selecting value to update	
+        $products = $wpdb->get_results($wpdb->prepare("SELECT product_id,name from $table_name where product_id=%s", $product_id));
         foreach ($products as $product) {
             $name = $product->name;
         }
@@ -30,11 +31,11 @@ function premio_products_update() {
 
         <?php if ($_POST['delete']) { ?>
             <div class="updated"><p>Product deleted</p></div>
-            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to Products List</a>
+            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to products list</a>
 
         <?php } else if ($_POST['update']) { ?>
             <div class="updated"><p>Product updated</p></div>
-            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to Products List</a>
+            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to products list</a>
 
         <?php } else { ?>
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -45,6 +46,7 @@ function premio_products_update() {
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
         <?php } ?>
+
     </div>
     <?php
 }
