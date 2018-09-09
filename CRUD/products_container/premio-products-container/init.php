@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Products
-Description: This plugin will allow us to perform CRUD operations over premio products table
+Plugin Name: Products Container
+Description: This plugin will allow us to perform CRUD operations over 'premio_product_container' table
 Version: 1
 Author: LEAPP Corporation
 */
@@ -29,15 +29,15 @@ function ss_options_install_products_container() {
 register_activation_hook(__FILE__, 'ss_options_install_products');
 
 //menu items
-add_action('admin_menu','premio_products_modifymenu');
-function premio_products_modifymenu() {
+add_action('admin_menu','premio_products_container_modifymenu');
+function premio_products_container_modifymenu() {
 	
 	//this is the main item for the menu
 	add_menu_page('Product Containers', //page title
 	'Product Containers', //menu title
 	'manage_options', //capabilities
-	'premio_product_container_list', //menu slug
-	'premio_product_container_list' //function
+	'premio_products_container_list', //menu slug
+	'premio_products_container_list' //function
 	);
 	
 	//this is a submenu
@@ -45,16 +45,16 @@ function premio_products_modifymenu() {
 	'Add New Container', //page title
 	'Add New', //menu title
 	'manage_options', //capability
-	'premio_product_container_create', //menu slug
-	'premio_product_container_create'); //function
+	'premio_products_container_create', //menu slug
+	'premio_products_container_create'); //function
 	
 	//this submenu is HIDDEN, however, we need to add it anyways
 	add_submenu_page(null, //parent slug
 	'Update Container', //page title
 	'Update', //menu title
 	'manage_options', //capability
-	'premio_product_container_update', //menu slug
-	'premio_product_container_update'); //function
+	'premio_products_container_update', //menu slug
+	'premio_products_container_update'); //function
 }
 define('ROOTDIR', plugin_dir_path(__FILE__));
 require_once('products-container-create.php');

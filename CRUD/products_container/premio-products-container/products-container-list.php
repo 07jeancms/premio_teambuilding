@@ -1,34 +1,34 @@
 <?php
 
-function premio_product_container_list() {
+function premio_products_container_list() {
     ?>
-    <link type="text/css" href="<?php echo plugins_url(); ?>/premio-products/style-admin.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo plugins_url(); ?>/premio-products-container/style-admin.css" rel="stylesheet" />
     <div class="wrap">
-        <h2>Products</h2>
+        <h2>Product Containers</h2>
         <div class="tablenav top">
             <div class="alignleft actions">
-                <a href="<?php echo admin_url('admin.php?page=premio_products_create'); ?>">Add New</a>
+                <a href="<?php echo admin_url('admin.php?page=premio_products_container_create'); ?>">Add New</a>
             </div>
             <br class="clear">
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "premio_product";
+        $table_name = $wpdb->prefix . "premio_product_container";
 
-        $rows = $wpdb->get_results("SELECT product_id, name from $table_name");
+        $rows = $wpdb->get_results("SELECT product_container_id, name from $table_name");
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
                 <th class="manage-column ss-list-width">ID</th>
-                <th class="manage-column ss-list-width">Product</th>
+                <th class="manage-column ss-list-width">Container</th>
                 <th class="manage-column ss-list-width">Action</th>
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->product_id; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $row->product_container_id; ?></td>
                     <td class="manage-column ss-list-width"><?php echo $row->name; ?></td>
-                    <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&product_id=' . $row->product_id); ?>">Update</a></td>
+                    <td><a href="<?php echo admin_url('admin.php?page=premio_products_container_update&product_container_id=' . $row->product_container_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
         </table>

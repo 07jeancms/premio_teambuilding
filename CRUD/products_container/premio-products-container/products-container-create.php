@@ -1,6 +1,6 @@
 <?php
 
-function premio_product_container_create() {
+function premio_products_container_create() {
     $name = $_POST["name"];
     //insert
     if (isset($_POST['insert'])) {

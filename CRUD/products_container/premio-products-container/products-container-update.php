@@ -1,6 +1,6 @@
 <?php
 
-function premio_product_container_update() {
+function premio_products_container_update() {
     global $wpdb;
     $table_name = $wpdb->prefix . "premio_product";
     $product_id = $_GET["product_id"];
@@ -27,7 +27,7 @@ function premio_product_container_update() {
     ?>
     <link type="text/css" href="<?php echo plugins_url(); ?>/premio-products/style-admin.css" rel="stylesheet" />
     <div class="wrap">
-        <h2>Products</h2>
+        <h2>Product Containers</h2>
 
         <?php if ($_POST['delete']) { ?>
             <div class="updated"><p>Product deleted</p></div>
