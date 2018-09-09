@@ -1,41 +1,39 @@
 <?php
 
-function sinetiks_schools_update() {
+function premio_products_update() {
     global $wpdb;
-    $table_name = $wpdb->prefix . "school";
-    $id = $_GET["id"];
+    $table_name = $wpdb->prefix . "premio_product";
+    $product_id = $_GET["product_id"];
     $name = $_POST["name"];
 //update
     if (isset($_POST['update'])) {
         $wpdb->update(
                 $table_name, //table
                 array('name' => $name), //data
-                array('ID' => $id), //where
-                array('%s'), //data format
                 array('%s') //where format
         );
     }
 //delete
     else if (isset($_POST['delete'])) {
-        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id = %s", $id));
+        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE product_id = %s", $product_id));
     } else {//selecting value to update	
-        $schools = $wpdb->get_results($wpdb->prepare("SELECT id,name from $table_name where id=%s", $id));
+        $schools = $wpdb->get_results($wpdb->prepare("SELECT id,name from $table_name where product_id=%s", $product_id));
         foreach ($schools as $s) {
             $name = $s->name;
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/sinetiks-schools/style-admin.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/premio-products/style-admin.css" rel="stylesheet" />
     <div class="wrap">
-        <h2>Schools</h2>
+        <h2>Products</h2>
 
         <?php if ($_POST['delete']) { ?>
-            <div class="updated"><p>School deleted</p></div>
-            <a href="<?php echo admin_url('admin.php?page=sinetiks_schools_list') ?>">&laquo; Back to schools list</a>
+            <div class="updated"><p>Product deleted</p></div>
+            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to schools list</a>
 
         <?php } else if ($_POST['update']) { ?>
             <div class="updated"><p>School updated</p></div>
-            <a href="<?php echo admin_url('admin.php?page=sinetiks_schools_list') ?>">&laquo; Back to schools list</a>
+            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to schools list</a>
 
         <?php } else { ?>
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">

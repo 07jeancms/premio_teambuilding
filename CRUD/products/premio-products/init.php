@@ -6,7 +6,7 @@ Version: 1
 Author: LEAPP Corporation
 */
 // function to create the DB / Options / Defaults					
-function ss_options_install() {
+function ss_options_install_products() {
 
     global $wpdb;
 
@@ -24,11 +24,11 @@ function ss_options_install() {
 }
 
 // run the install scripts upon plugin activation
-register_activation_hook(__FILE__, 'ss_options_install');
+register_activation_hook(__FILE__, 'ss_options_install_products');
 
 //menu items
-add_action('admin_menu','sinetiks_schools_modifymenu');
-function sinetiks_schools_modifymenu() {
+add_action('admin_menu','premio_products_modifymenu');
+function premio_products_modifymenu() {
 	
 	//this is the main item for the menu
 	add_menu_page('Products', //page title
@@ -55,6 +55,6 @@ function sinetiks_schools_modifymenu() {
 	'premio_products_update'); //function
 }
 define('ROOTDIR', plugin_dir_path(__FILE__));
-require_once(ROOTDIR . 'products-create.php');
-require_once(ROOTDIR . 'products-list.php');
-require_once(ROOTDIR . 'products-update.php');
+require_once('products-create.php');
+require_once('products-list.php');
+require_once('products-update.php');

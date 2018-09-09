@@ -11,7 +11,7 @@ function premio_products_create() {
         $wpdb->insert(
                 $table_name, //table
                 array('premio_product' => $premio_product, 'name' => $name), //data
-                array('%s', '%s') //data format			
+                array('%s') //data format			
         );
         $message.="Product Inserted";
     }
