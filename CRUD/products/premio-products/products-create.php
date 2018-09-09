@@ -28,6 +28,12 @@ function premio_products_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
+        <div class="tablenav top">
+            <div class="alignleft actions">
+                <a href="<?php echo admin_url('admin.php?page=premio_products_list'); ?>">Back to Products</a>
+            </div>
+            <br class="clear">
+        </div>
     </div>
     <?php
 }
