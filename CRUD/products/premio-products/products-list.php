@@ -28,7 +28,7 @@ function premio_products_list() {
                 <tr>
                     <td class="manage-column ss-list-width"><?php echo $row->product_id; ?></td>
                     <td class="manage-column ss-list-width"><?php echo $row->name; ?></td>
-                    <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&id=' . $row->product_id); ?>">Update</a></td>
+                    <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&product_id=' . $row->product_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
         </table>

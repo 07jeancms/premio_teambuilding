@@ -29,7 +29,7 @@ function premio_products_update() {
 
         <?php if ($_POST['delete']) { ?>
             <div class="updated"><p>Product deleted</p></div>
-            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to schools list</a>
+            <a href="<?php echo admin_url('admin.php?page=premio_products_list') ?>">&laquo; Back to Products List</a>
 
         <?php } else if ($_POST['update']) { ?>
             <div class="updated"><p>School updated</p></div>
