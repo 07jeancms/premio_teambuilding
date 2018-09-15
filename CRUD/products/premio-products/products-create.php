@@ -1,10 +1,14 @@
 <?php
 
 function premio_products_create() {
+    // Set Product Containers values
+    global $wpdb;
+    $product_container_table = $wpdb->prefix . "premio_product_container";
+    $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
+
     $name = $_POST["name"];
     //insert
     if (isset($_POST['insert'])) {
-        global $wpdb;
         $table_name = $wpdb->prefix . "premio_product";
 
         $wpdb->insert(
@@ -12,6 +16,7 @@ function premio_products_create() {
                 array('name' => $name), //data
                 array('%s') //data format			
         );
+        $wpdb->query("CALL 'create_product'('{$name}');");
         $message.="Product inserted";
     }
     ?>
@@ -22,8 +27,18 @@ function premio_products_create() {
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <table class='wp-list-table widefat fixed'>
                 <tr>
-                    <th class="ss-th-width">Product</th>
+                    <th class="ss-th-width">Name</th>
                     <td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width" /></td>
+                </tr>
+                <tr>
+                    <th class="ss-th-width">Container</th>
+                    <td>
+                        <select>
+                            <?php foreach ($product_containers as $container) { ?>
+                                <option value="<?php echo $container->name; ?>"><?php echo $container->name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
                 </tr>
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
