@@ -13,21 +13,25 @@ function premio_products_list() {
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "premio_product";
 
-        $rows = $wpdb->get_results("SELECT product_id, name from $table_name");
+        $rows = $wpdb->get_results($wpdb->prepare(
+            "CALL show_product_info()"
+        ));
+
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
                 <th class="manage-column ss-list-width">ID</th>
                 <th class="manage-column ss-list-width">Product</th>
+                <th class="manage-column ss-list-width">Container</th>
                 <th class="manage-column ss-list-width">Action</th>
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
                     <td class="manage-column ss-list-width"><?php echo $row->product_id; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->name; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $row->product_name; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $row->container_name; ?></td>
                     <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&product_id=' . $row->product_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
