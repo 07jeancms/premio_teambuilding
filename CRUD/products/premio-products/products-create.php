@@ -7,11 +7,13 @@ function premio_products_create() {
     $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
 
     $name = $_POST["name"];
+    $product_container_id = $_POST['productContainerDpw'];;
+
     //insert
     if (isset($_POST['insert'])) {
         $table_name = $wpdb->prefix . "premio_product";
 
-        $wpdb->query("CALL create_product('{$name}')");
+        $wpdb->query("CALL create_product('{$name}', '{$product_container_id}')");
         $message.="Product inserted";
     }
     ?>
@@ -28,9 +30,9 @@ function premio_products_create() {
                 <tr>
                     <th class="ss-th-width">Container</th>
                     <td>
-                        <select>
+                        <select name="productContainerDpw">
                             <?php foreach ($product_containers as $container) { ?>
-                                <option value="<?php echo $container->name; ?>"><?php echo $container->name; ?></option>
+                                <option value="<?php echo $container->product_container_id; ?>"><?php echo $container->name; ?></option>
                             <?php } ?>
                         </select>
                     </td>
