@@ -11,12 +11,7 @@ function premio_products_create() {
     if (isset($_POST['insert'])) {
         $table_name = $wpdb->prefix . "premio_product";
 
-        $wpdb->insert(
-                $table_name, //table
-                array('name' => $name), //data
-                array('%s') //data format			
-        );
-        $wpdb->query("CALL 'create_product'('{$name}');");
+        $wpdb->query("CALL create_product('{$name}')");
         $message.="Product inserted";
     }
     ?>
