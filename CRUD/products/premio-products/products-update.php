@@ -22,7 +22,7 @@ function premio_products_update() {
     }
     //delete
     else if (isset($_POST['delete'])) {
-        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE product_id = %s", $product_id));
+        $wpdb->query("CALL delete_product('{$product_id}')");
     } else {//selecting value to update	
         $products = $wpdb->get_results($wpdb->prepare("SELECT product_id,name from $table_name where product_id=%s", $product_id));
         foreach ($products as $product) {
