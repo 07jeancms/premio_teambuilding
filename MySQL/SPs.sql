@@ -33,6 +33,18 @@ DELIMITER //
         FROM `wp_premio_product` as product
         INNER JOIN `wp_products_by_container` as products_by_container ON product.`product_id` = products_by_container.`product_product_id_fk`
         INNER JOIN `wp_premio_product_container` as container ON products_by_container.`product_container_id_fk` = container.`product_container_id`
-        where product.`product_id` = pProductID;
+        WHERE product.`product_id` = pProductID;
+    END //
+DELIMITER ;
+
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS update_product;
+
+DELIMITER //
+    CREATE PROCEDURE update_product (IN pProductID INT, IN pProductName VARCHAR(50), IN pProductContainerID INT)
+    BEGIN
+        UPDATE `wp_premio_product` SET name = pProductName WHERE product_id = pProductID;
+        UPDATE `wp_products_by_container` SET product_container_id_fk = pProductContainerID; 
     END //
 DELIMITER ;

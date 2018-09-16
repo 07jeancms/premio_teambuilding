@@ -7,7 +7,7 @@ function premio_products_create() {
     $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
 
     $name = $_POST["name"];
-    $product_container_id = $_POST['productContainerDpw'];;
+    $product_container_id = $_POST['productContainerDpw'];
 
     //insert
     if (isset($_POST['insert'])) {

@@ -4,10 +4,12 @@ function premio_products_update() {
     global $wpdb;
 
     $table_name = $wpdb->prefix . "premio_product";
-    $product_id = $_GET["product_id"];
 
     $product_container_table = $wpdb->prefix . "premio_product_container";
     $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
+
+    $product_id = $_GET["product_id"];
+    $post_product_container_id = $_POST['productContainerDpw'];
 
     $selected_container = $wpdb->get_row($wpdb->prepare(
         "CALL show_selected_container('{$product_id}')"
@@ -16,13 +18,7 @@ function premio_products_update() {
     $name = $_POST["name"];
     //update
     if (isset($_POST['update'])) {
-        $wpdb->update(
-                $table_name, //table
-                array('name' => $name), //data
-                array('product_id' => $product_id), //where
-                array('%s'), //data format
-                array('%s') //where format
-        );
+        $wpdb->query("CALL update_product('{$product_id}', '{$name}', '{$post_product_container_id}')");
     }
     //delete
     else if (isset($_POST['delete'])) {
