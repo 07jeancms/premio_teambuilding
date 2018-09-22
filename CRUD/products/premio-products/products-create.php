@@ -30,7 +30,7 @@ function premio_products_create() {
                 </tr>
                 <tr>
                 <th class="ss-th-width">Description</th>
-                    <td><input type="text" name="description" value="<?php echo $description; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="description" rows="5" cols="40" class="ss-field-width" /><?php echo $description; ?></textarea></td>
                 </tr
                 <tr>
                     <th class="ss-th-width">Container</th>

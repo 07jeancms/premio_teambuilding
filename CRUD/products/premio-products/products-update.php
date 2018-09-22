@@ -56,7 +56,7 @@ function premio_products_update() {
                     </tr>
                     <tr>
                         <th>Description</th>
-                        <td><input type="text" name="product_description" value="<?php echo $product_description; ?>"/></td>
+                        <td><textarea name="product_description" rows="5" cols="20"><?php echo $product_description; ?></textarea></td>
                     </tr>
                     <tr>
                         <th>Container</th>
