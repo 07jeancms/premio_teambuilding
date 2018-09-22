@@ -22,9 +22,9 @@ function premio_products_list() {
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
                 <th class="manage-column ss-list-width">ID</th>
-                <th class="manage-column ss-list-width">Product</th>
-                <th class="manage-column ss-list-width">Container</th>
-                <th class="manage-column ss-list-width">Action</th>
+                <th class="manage-column ss-list-width">PRODUCT</th>
+                <th class="manage-column ss-list-width">CONTAINER</th>
+                <th class="manage-column ss-list-width">ACTION</th>
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
