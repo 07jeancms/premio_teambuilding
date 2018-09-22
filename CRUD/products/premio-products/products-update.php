@@ -16,17 +16,21 @@ function premio_products_update() {
     ));
 
     $name = $_POST["name"];
+    $product_description = $_POST["product_description"];
+
     //update
     if (isset($_POST['update'])) {
-        $wpdb->query("CALL update_product('{$product_id}', '{$name}', '{$post_product_container_id}')");
+        $wpdb->query("CALL update_product('{$product_id}', '{$name}', '{$product_description}', '{$post_product_container_id}')");
     }
     //delete
     else if (isset($_POST['delete'])) {
         $wpdb->query("CALL delete_product('{$product_id}')");
-    } else {//selecting value to update	
-        $products = $wpdb->get_results($wpdb->prepare("SELECT product_id,name from $table_name where product_id=%s", $product_id));
+    } else {
+        //selecting value to update	
+        $products = $wpdb->get_results($wpdb->prepare("SELECT * from $table_name where product_id=%s", $product_id));
         foreach ($products as $product) {
             $name = $product->name;
+            $product_description = $product->description;
         }
     }
     ?>
@@ -49,6 +53,10 @@ function premio_products_update() {
                     <tr>
                         <th>Name</th>
                         <td><input type="text" name="name" value="<?php echo $name; ?>"/></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><input type="text" name="product_description" value="<?php echo $product_description; ?>"/></td>
                     </tr>
                     <tr>
                         <th>Container</th>
