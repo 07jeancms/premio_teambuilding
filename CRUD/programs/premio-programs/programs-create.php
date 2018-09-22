@@ -28,35 +28,35 @@ function premio_programs_create() {
             <table class='wp-list-table widefat fixed'>
                 <tr>
                     <th class="ss-th-width">PROGRAM</th>
-                    <td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="name" rows="5" cols="40"><?php echo $name; ?></textarea></td>
                 </tr>
                 <tr>
                     <th class="ss-th-width">DESCRIPTION</th>
-                    <td><input type="text" name="description" value="<?php echo $description; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="description" rows="5" cols="40"><?php echo $description; ?></textarea></td>
                 </tr>
                 <tr>
                     <th class="ss-th-width">LOCATION</th>
-                    <td><input type="text" name="location" value="<?php echo $location; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="location" rows="5" cols="40"><?php echo $location; ?></textarea></td>
                 </tr>
                 <tr>
                     <th class="ss-th-width">PARTICIPANTS</th>
-                    <td><input type="text" name="participants" value="<?php echo $participants; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="participants" rows="5" cols="40"><?php echo $participants; ?></textarea></td>
                 </tr>
                 <tr>
                     <th class="ss-th-width">DURATION</th>
-                    <td><input type="text" name="duration" value="<?php echo $duration; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="duration" rows="5" cols="40"><?php echo $duration; ?></textarea></td>
                 </tr>
                 <tr>
                     <th class="ss-th-width">PARTICIPATION</th>
-                    <td><input type="text" name="participation_type" value="<?php echo $participation_type; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="participation_type" rows="5" cols="40"><?php echo $participation_type; ?></textarea></td>
                 </tr> 
                 <tr>
                     <th class="ss-th-width">TOP OUTCOMES</th>
-                    <td><input type="text" name="top_outcomes" value="<?php echo $top_outcomes; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="top_outcomes" rows="5" cols="40"><?php echo $top_outcomes; ?></textarea></td>
                 </tr>     
                 <tr>
                     <th class="ss-th-width">ICON LABELS</th>
-                    <td><input type="text" name="icon_labels" value="<?php echo $icon_labels; ?>" class="ss-field-width" /></td>
+                    <td><textarea name="icon_labels" rows="5" cols="40"><?php echo $icon_labels; ?></textarea></td>
                 </tr>                                                
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
