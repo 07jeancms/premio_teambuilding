@@ -82,3 +82,26 @@ DELIMITER ;
 --                     __/ |                        
 --                    |___/                         
 
+
+DROP PROCEDURE IF EXISTS create_program;
+
+DELIMITER //
+    CREATE PROCEDURE create_program (IN pName VARCHAR(60), IN pDescription TEXT, IN pLocation VARCHAR(60), IN pAmountOfParticipants VARCHAR(60),
+                                    IN pDuration VARCHAR(60), IN pParticipationType VARCHAR(60), IN pTopOutcomes VARCHAR(400), IN pIconLabels VARCHAR(400))
+    BEGIN
+        INSERT INTO `wp_premio_program` VALUES(NULL, pName, pDescription, pLocation, pAmountOfParticipants, pDuration, pParticipationType, pTopOutcomes, pIconLabels);
+    END //
+DELIMITER ;
+
+/*================================================*/
+
+
+
+
+
+
+
+
+
+
+
