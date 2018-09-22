@@ -26,18 +26,38 @@ function premio_programs_list() {
                 <th class="manage-column ss-list-width">Participants</th>
                 <th class="manage-column ss-list-width">Duration</th>
                 <th class="manage-column ss-list-width">Participation</th>
+                <th class="manage-column ss-list-width">Outcomes</th>
+                <th class="manage-column ss-list-width">Labels</th>
                 <th class="manage-column ss-list-width">Action</th>
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
                     <td class="manage-column ss-list-width"><?php echo $row->program_id; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->name; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->description; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->location; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->amount_of_participants; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->duration; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->participation_type; ?></td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="name" rows="5" cols="10" readonly><?php echo $row->name; ?></textarea>
+                    </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="description" rows="5" cols="10" readonly><?php echo $row->description; ?></textarea>
+                    </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="location" rows="5" cols="10" readonly><?php echo $row->location; ?></textarea>
+                    </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="amount_of_participants" rows="5" cols="10" readonly><?php echo $row->amount_of_participants; ?></textarea>
+                    </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="duration" rows="5" cols="10" readonly><?php echo $row->duration; ?></textarea>
+                    </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="participation_type" rows="5" cols="10" readonly><?php echo $row->participation_type; ?></textarea>
+                    </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="top_outcomes" rows="5" cols="10" readonly><?php echo $row->top_outcomes; ?></textarea>
+                    </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="icon_labels" rows="5" cols="10" readonly><?php echo $row->icon_labels; ?></textarea>
+                    </td>
                     <td><a href="<?php echo admin_url('admin.php?page=premio_programs_update&program_id=' . $row->program_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
