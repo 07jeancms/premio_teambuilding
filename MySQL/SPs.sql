@@ -45,7 +45,7 @@ DELIMITER //
     CREATE PROCEDURE update_product (IN pProductID INT, IN pProductName VARCHAR(50), IN pProductContainerID INT)
     BEGIN
         UPDATE `wp_premio_product` SET name = pProductName WHERE product_id = pProductID;
-        UPDATE `wp_products_by_container` SET product_container_id_fk = pProductContainerID; 
+        UPDATE `wp_products_by_container` SET product_container_id_fk = pProductContainerID where product_product_id_fk = pProductID; 
     END //
 DELIMITER ;
 
