@@ -75,8 +75,9 @@ DROP PROCEDURE IF EXISTS delete_product;
 DELIMITER //
     CREATE PROCEDURE delete_product (IN pProductID INT)
     BEGIN
-        DELETE FROM `wp_premio_product` WHERE product_id = pProductID;
         DELETE FROM `wp_products_by_container` WHERE product_product_id_fk = pProductID; 
+        DELETE FROM `wp_premio_product_by_program` WHERE product_id_fk = pProductID;
+        DELETE FROM `wp_premio_product` WHERE product_id = pProductID;
     END //
 DELIMITER ;
 
