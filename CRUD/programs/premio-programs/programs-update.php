@@ -13,11 +13,12 @@ function premio_programs_update() {
     $participation_type = $_POST["name"];
     $top_outcomes = $_POST["top_outcomes"];
     $icon_labels = $_POST["icon_labels"];
+    $video_url = $_POST["video_url"];
 
     //update
     if (isset($_POST['update'])) {
         $wpdb->query("CALL update_program('{$program_id}', '{$name}', '{$description}', '{$location}', '{$participants}', '{$duration}', 
-                                            '{$participation_type}', '{$top_outcomes}', '{$icon_labels}')");
+                                            '{$participation_type}', '{$top_outcomes}', '{$icon_labels}', '{$video_url}')");
     }
     //delete
     else if (isset($_POST['delete'])) {
@@ -34,6 +35,7 @@ function premio_programs_update() {
             $participation_type = $program->participation_type;
             $top_outcomes = $program->top_outcomes;
             $icon_labels = $program->icon_labels;
+            $video_url = $program->video_url;
         }
     }
     ?>
@@ -60,6 +62,7 @@ function premio_programs_update() {
                     <tr><th>Participation</th><td><textarea name="participation_type" rows="5" cols="10"><?php echo $participation_type; ?></textarea></td></tr>
                     <tr><th>Outcomes</th><td><textarea name="top_outcomes" rows="5" cols="10"><?php echo $top_outcomes; ?></textarea></td></tr>
                     <tr><th>Labels</th><td><textarea name="icon_labels" rows="5" cols="10"><?php echo $icon_labels; ?></textarea></td></tr>
+                    <tr><th>Video URL</th><td><textarea name="video_url" rows="5" cols="10"><?php echo $video_url; ?></textarea></td></tr>
                 </table>
                 <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">

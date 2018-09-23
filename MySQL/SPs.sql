@@ -111,10 +111,11 @@ DROP PROCEDURE IF EXISTS update_program;
 DELIMITER //
     CREATE PROCEDURE update_program (IN pProgramID INT, IN pProgramName VARCHAR(60), IN pDescription TEXT, IN pLocation VARCHAR(60),
                                     IN pAmountOfParticipants VARCHAR(60), IN pDuration VARCHAR(60), IN pParticipationType VARCHAR(60),
-                                    IN pTopOutcomes VARCHAR(400), IN pIconLabels VARCHAR(400))
+                                    IN pTopOutcomes VARCHAR(400), IN pIconLabels VARCHAR(400), IN pVideoURL TEXT)
     BEGIN
         UPDATE `wp_premio_program` SET name = pProgramName, description = pDescription, location = pLocation, amount_of_participants = pAmountOfParticipants,
-                                    duration = pDuration, participation_type = pParticipationType, top_outcomes = pTopOutcomes, icon_labels = pIconLabels 
+                                    duration = pDuration, participation_type = pParticipationType, top_outcomes = pTopOutcomes, icon_labels = pIconLabels,
+                                    video_url = pVideoURL 
                                     WHERE program_id = pProgramID;
     END //
 DELIMITER ;
