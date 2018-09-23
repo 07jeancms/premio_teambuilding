@@ -25,6 +25,7 @@ function premio_products_list() {
                 <th class="manage-column ss-list-width">PRODUCT</th>
                 <th class="manage-column ss-list-width">DESCRIPTION</th>
                 <th class="manage-column ss-list-width">CONTAINER</th>
+                <th class="manage-column ss-list-width">PROGRAM</th>
                 <th class="manage-column ss-list-width">ACTION</th>
                 <th>&nbsp;</th>
             </tr>
@@ -36,6 +37,7 @@ function premio_products_list() {
                         <textarea rows="5" cols="20" readonly><?php echo $row->product_description; ?></textarea>
                     </td>
                     <td class="manage-column ss-list-width"><?php echo $row->container_name; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $row->program_name; ?></td>
                     <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&product_id=' . $row->product_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>

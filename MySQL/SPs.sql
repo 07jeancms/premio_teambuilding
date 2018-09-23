@@ -29,10 +29,13 @@ DROP PROCEDURE IF EXISTS show_product_info;
 DELIMITER //
     CREATE PROCEDURE show_product_info ()
     BEGIN
-        SELECT product.`product_id`, product.`name` as product_name, product.`description` as product_description, container.`name` as container_name
+        SELECT product.`product_id`, product.`name` as product_name, product.`description` as product_description, container.`name` as container_name,
+                program.`name` as program_name
         FROM `wp_premio_product` as product
         INNER JOIN `wp_products_by_container` as products_by_container ON product.`product_id` = products_by_container.`product_product_id_fk`
-        INNER JOIN `wp_premio_product_container` as container ON products_by_container.`product_container_id_fk` = container.`product_container_id`;
+        INNER JOIN `wp_premio_product_container` as container ON products_by_container.`product_container_id_fk` = container.`product_container_id`
+        INNER JOIN `wp_premio_product_by_program` as product_by_program ON product.`product_id` = product_by_program.`product_id_fk`
+        INNER JOIN `wp_premio_program` as program ON product_by_program.`program_id_fk` = program.`program_id`;
     END //
 DELIMITER ;
 
