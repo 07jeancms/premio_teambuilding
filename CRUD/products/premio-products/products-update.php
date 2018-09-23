@@ -6,21 +6,28 @@ function premio_products_update() {
     $table_name = $wpdb->prefix . "premio_product";
 
     $product_container_table = $wpdb->prefix . "premio_product_container";
-    $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
+    $program_table = $wpdb->prefix . "premio_program";
 
-    $product_id = $_GET["product_id"];
-    $post_product_container_id = $_POST['productContainerDpw'];
+    $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
+    $programs = $wpdb->get_results("SELECT * from $program_table");    
 
     $selected_container = $wpdb->get_row($wpdb->prepare(
         "CALL show_selected_container('{$product_id}')"
     ));
 
+    $selected_program = $wpdb->get_row($wpdb->prepare(
+        "CALL show_selected_program('{$product_id}')"
+    ));
+
+    $product_id = $_GET["product_id"];
     $name = $_POST["name"];
     $product_description = $_POST["product_description"];
+    $post_product_container_id = $_POST['productContainerDpw'];
+    $post_program_id = $_POST['programDpw'];
 
     //update
     if (isset($_POST['update'])) {
-        $wpdb->query("CALL update_product('{$product_id}', '{$name}', '{$product_description}', '{$post_product_container_id}')");
+        $wpdb->query("CALL update_product('{$product_id}', '{$name}', '{$product_description}', '{$post_product_container_id}', '{$post_program_id}' )");
     }
     //delete
     else if (isset($_POST['delete'])) {
@@ -70,6 +77,23 @@ function premio_products_update() {
                                             } 
                                         ?>>
                                         <?php echo $container->name; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Program</th>
+                        <td>
+                            <select name="programDpw">
+                                <?php foreach ($programs as $program) { ?>
+                                    <option value="<?php echo $program->program_id; ?>" 
+                                        <?php 
+                                            if($program->program_id == $selected_program->program_id){
+                                                echo "selected";
+                                            } 
+                                        ?>>
+                                        <?php echo $program->name; ?>
                                     </option>
                                 <?php } ?>
                             </select>

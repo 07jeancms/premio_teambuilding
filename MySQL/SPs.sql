@@ -59,10 +59,12 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS update_product;
 
 DELIMITER //
-    CREATE PROCEDURE update_product (IN pProductID INT, IN pProductName VARCHAR(50), IN pProductDescription TEXT, IN pProductContainerID INT)
+    CREATE PROCEDURE update_product (IN pProductID INT, IN pProductName VARCHAR(50), IN pProductDescription TEXT, IN pProductContainerID INT, 
+                                    IN pProductProgramID INT)
     BEGIN
         UPDATE `wp_premio_product` SET name = pProductName, description = pProductDescription WHERE product_id = pProductID;
-        UPDATE `wp_products_by_container` SET product_container_id_fk = pProductContainerID where product_product_id_fk = pProductID; 
+        UPDATE `wp_products_by_container` SET product_container_id_fk = pProductContainerID where product_product_id_fk = pProductID;
+        UPDATE `wp_premio_product_by_program` SET program_id_fk = pProductProgramID where product_id_fk = pProductID;
     END //
 DELIMITER ;
 
@@ -128,6 +130,25 @@ DELIMITER //
         WHERE product.`product_id` = pProductID;
     END //
 DELIMITER ;
+
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS show_selected_program;
+
+DELIMITER //
+    CREATE PROCEDURE show_selected_program (IN pProductID INT)
+    BEGIN
+        SELECT program.`program_id` as program_id, program.`name` as program_name
+        FROM `wp_premio_product` as product
+        INNER JOIN `wp_premio_product_by_program` as products_by_program ON product.`product_id` = products_by_program.`product_id_fk`
+        INNER JOIN `wp_premio_program` as program ON products_by_program.`program_id_fk` = program.`program_id`
+        WHERE product.`product_id` = pProductID;
+    END //
+DELIMITER ;
+
+
+
+
 
 
 
