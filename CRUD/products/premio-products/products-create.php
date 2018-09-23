@@ -4,17 +4,20 @@ function premio_products_create() {
     // Set Product Containers values
     global $wpdb;
     $product_container_table = $wpdb->prefix . "premio_product_container";
+    $program_table = $wpdb->prefix . "premio_program";
     $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
+    $programs = $wpdb->get_results("SELECT * from $program_table");
 
     $name = $_POST["name"];
     $description = $_POST["description"];
     $product_container_id = $_POST['productContainerDpw'];
+    $program_id = $_POST['programDpw'];
 
     //insert
     if (isset($_POST['insert'])) {
         $table_name = $wpdb->prefix . "premio_product";
 
-        $wpdb->query("CALL create_product('{$name}', '{$description}', '{$product_container_id}')");
+        $wpdb->query("CALL create_product('{$name}', '{$description}', '{$product_container_id}', '{$program_id}')");
         $message.="Product inserted";
     }
     ?>
@@ -29,15 +32,25 @@ function premio_products_create() {
                     <td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width" /></td>
                 </tr>
                 <tr>
-                <th class="ss-th-width">Description</th>
+                    <th class="ss-th-width">Description</th>
                     <td><textarea name="description" rows="5" cols="40" class="ss-field-width" /><?php echo $description; ?></textarea></td>
-                </tr
+                </tr>
                 <tr>
                     <th class="ss-th-width">Container</th>
                     <td>
                         <select name="productContainerDpw">
                             <?php foreach ($product_containers as $container) { ?>
                                 <option value="<?php echo $container->product_container_id; ?>"><?php echo $container->name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="ss-th-width">Program</th>
+                    <td>
+                        <select name="programDpw">
+                            <?php foreach ($programs as $program) { ?>
+                                <option value="<?php echo $program->program_id; ?>"><?php echo $program->name; ?></option>
                             <?php } ?>
                         </select>
                     </td>

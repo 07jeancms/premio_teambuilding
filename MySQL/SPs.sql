@@ -12,10 +12,13 @@
 DROP PROCEDURE IF EXISTS create_product;
 
 DELIMITER //
-    CREATE PROCEDURE create_product (IN pName VARCHAR(50), IN pDescription TEXT, IN pProductContainer INT)
+    CREATE PROCEDURE create_product (IN pName VARCHAR(50), IN pDescription TEXT, IN pProductContainerID INT, IN pProgramID INT)
     BEGIN
+        DECLARE last_inserted_product_id INT;
         INSERT INTO wp_premio_product VALUES(NULL, pName, pDescription);
-        INSERT INTO wp_products_by_container VALUE(NULL, LAST_INSERT_ID(), pProductContainer);
+        SET last_inserted_product_id = LAST_INSERT_ID();
+        INSERT INTO wp_products_by_container VALUE(NULL, last_inserted_product_id, pProductContainerID);
+        INSERT INTO wp_premio_product_by_program VALUE(NULL, pProgramID, last_inserted_product_id);
     END //
 DELIMITER ;
 
@@ -108,7 +111,20 @@ DELIMITER //
     END //
 DELIMITER ;
 
+/*================================================*/
 
+DROP PROCEDURE IF EXISTS show_selected_program;
+
+DELIMITER //
+    CREATE PROCEDURE show_selected_program (IN pProductID INT)
+    BEGIN
+        SELECT program.`program_id` as program_id, container.`name` as container_name
+        FROM `wp_premio_product` as product
+        INNER JOIN `wp_premio_product_by_program` as products_by_program ON product.`product_id` = products_by_program.`product_id_fk`
+        INNER JOIN `wp_premio_program` as program ON products_by_program.`program_id_fk` = program.`program_id`
+        WHERE product.`product_id` = pProductID;
+    END //
+DELIMITER ;
 
 
 
