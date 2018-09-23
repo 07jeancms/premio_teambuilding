@@ -28,6 +28,7 @@ function premio_programs_list() {
                 <th class="manage-column ss-list-width">Participation</th>
                 <th class="manage-column ss-list-width">Outcomes</th>
                 <th class="manage-column ss-list-width">Labels</th>
+                <th class="manage-column ss-list-width">Video URL</th>
                 <th class="manage-column ss-list-width">Action</th>
                 <th>&nbsp;</th>
             </tr>
@@ -58,6 +59,9 @@ function premio_programs_list() {
                     <td class="manage-column ss-list-width">
                         <textarea name="icon_labels" rows="5" cols="10" readonly><?php echo $row->icon_labels; ?></textarea>
                     </td>
+                    <td class="manage-column ss-list-width">
+                        <textarea name="video_url" rows="5" cols="10" readonly><?php echo $row->video_url; ?></textarea>
+                    </td>                    
                     <td><a href="<?php echo admin_url('admin.php?page=premio_programs_update&program_id=' . $row->program_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
