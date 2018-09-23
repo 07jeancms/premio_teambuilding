@@ -9,13 +9,14 @@ function premio_programs_create() {
     $participation_type = $_POST["name"];
     $top_outcomes = $_POST["top_outcomes"];
     $icon_labels = $_POST["icon_labels"];
+    $video_url = $_POST["video_url"];
     //insert
     if (isset($_POST['insert'])) {
         global $wpdb;
         $table_name = $wpdb->prefix . "premio_program";
 
         $wpdb->query("CALL create_program('{$name}', '{$description}', '{$location}', '{$participants}', '{$duration}', '{$participation_type}', 
-                                        '{$top_outcomes}', '{$icon_labels}'
+                                        '{$top_outcomes}', '{$icon_labels}', '{$video_url}'
                     )");
         $message.="Program inserted";
     }
@@ -57,7 +58,11 @@ function premio_programs_create() {
                 <tr>
                     <th class="ss-th-width">ICON LABELS</th>
                     <td><textarea name="icon_labels" rows="5" cols="40"><?php echo $icon_labels; ?></textarea></td>
-                </tr>                                                
+                </tr>
+                <tr>
+                    <th class="ss-th-width">VIDEO URL</th>
+                    <td><textarea name="video_url" rows="3" cols="40"><?php echo $video_url; ?></textarea></td>
+                </tr>                                         
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
