@@ -14,7 +14,7 @@ function premio_products_list() {
         <?php
         global $wpdb;
 
-        $rows = $wpdb->get_results($wpdb->prepare(
+        $products = $wpdb->get_results($wpdb->prepare(
             "CALL show_product_info()"
         ));
 
@@ -25,20 +25,29 @@ function premio_products_list() {
                 <th class="manage-column ss-list-width">PRODUCT</th>
                 <th class="manage-column ss-list-width">DESCRIPTION</th>
                 <th class="manage-column ss-list-width">CONTAINER</th>
-                <th class="manage-column ss-list-width">PROGRAM</th>
+                <th class="manage-column ss-list-width">PROGRAMS</th>
                 <th class="manage-column ss-list-width">ACTION</th>
                 <th>&nbsp;</th>
             </tr>
-            <?php foreach ($rows as $row) { ?>
+            <?php foreach ($products as $product) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->product_id; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->product_name; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $product->product_id; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $product->product_name; ?></td>
                     <td class="manage-column ss-list-width">
-                        <textarea rows="5" cols="20" readonly><?php echo $row->product_description; ?></textarea>
+                        <textarea products="5" cols="20" readonly><?php echo $product->product_description; ?></textarea>
                     </td>
-                    <td class="manage-column ss-list-width"><?php echo $row->container_name; ?></td>
-                    <td class="manage-column ss-list-width"><?php echo $row->program_name; ?></td>
-                    <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&product_id=' . $row->product_id); ?>">Update</a></td>
+                    <td class="manage-column ss-list-width"><?php echo $product->container_name; ?></td>
+                    <td>
+                    <?php 
+                        $programs_by_product = $wpdb->get_results($wpdb->prepare(
+                            "CALL show_product_programs('{$product_id}')"
+                        ));
+                    ?>
+                        <?php foreach ($programs_by_product as $program) { ?>
+                            <input name="checkbox[]" type="checkbox" value="<?php echo $program->program_id; ?>" disabled> <?php echo $program->program_name; ?> <br>
+                        <?php } ?>
+                    </td>
+                    <td><a href="<?php echo admin_url('admin.php?page=premio_products_update&product_id=' . $product->product_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
         </table>
