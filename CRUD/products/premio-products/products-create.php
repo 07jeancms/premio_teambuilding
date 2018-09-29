@@ -11,13 +11,31 @@ function premio_products_create() {
     $name = $_POST["name"];
     $description = $_POST["description"];
     $product_container_id = $_POST['productContainerDpw'];
-    $program_id = $_POST['programDpw'];
 
     //insert
     if (isset($_POST['insert'])) {
         $table_name = $wpdb->prefix . "premio_product";
 
-        $wpdb->query("CALL create_product('{$name}', '{$description}', '{$product_container_id}', '{$program_id}')");
+        $wpdb->query("CALL create_product('{$name}', '{$description}', '{$product_container_id}')");
+
+        if(!empty($_POST['checkbox'])) {
+            foreach($_POST["checkbox"] as $v) {
+                $program_id_to_int = (int)$v;
+
+                $last_inserted_product_id = $wpdb->get_row($wpdb->prepare(
+                    "SELECT product_id as last_inserted_product_id FROM wp_premio_product ORDER BY product_id DESC LIMIT 1"
+                ));
+
+                $wpdb->insert(
+                    $wpdb->prefix.'premio_product_by_program', 
+                    array(
+                        'product_by_program_id' => NULL,
+                        'program_id_fk' => $program_id_to_int, 
+                        'product_id_fk' => $last_inserted_product_id->last_inserted_product_id)
+                );
+            }
+        }
+        
         $message.="Product inserted";
     }
     ?>
@@ -46,13 +64,11 @@ function premio_products_create() {
                     </td>
                 </tr>
                 <tr>
-                    <th class="ss-th-width">Program</th>
+                    <th class="ss-th-width">Programs</th>
                     <td>
-                        <select name="programDpw">
-                            <?php foreach ($programs as $program) { ?>
-                                <option value="<?php echo $program->program_id; ?>"><?php echo $program->name; ?></option>
-                            <?php } ?>
-                        </select>
+                        <?php foreach ($programs as $program) { ?>
+                            <input name="checkbox[]" type="checkbox" id="checkbox[]" value="<?php echo $program->program_id; ?>"> <?php echo $program->name; ?> <br>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>

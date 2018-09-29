@@ -12,13 +12,12 @@
 DROP PROCEDURE IF EXISTS create_product;
 
 DELIMITER //
-    CREATE PROCEDURE create_product (IN pName VARCHAR(50), IN pDescription TEXT, IN pProductContainerID INT, IN pProgramID INT)
+    CREATE PROCEDURE create_product (IN pName VARCHAR(50), IN pDescription TEXT, IN pProductContainerID INT)
     BEGIN
         DECLARE last_inserted_product_id INT;
         INSERT INTO wp_premio_product VALUES(NULL, pName, pDescription);
         SET last_inserted_product_id = LAST_INSERT_ID();
         INSERT INTO wp_products_by_container VALUE(NULL, last_inserted_product_id, pProductContainerID);
-        INSERT INTO wp_premio_product_by_program VALUE(NULL, pProgramID, last_inserted_product_id);
     END //
 DELIMITER ;
 
