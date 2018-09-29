@@ -52,6 +52,24 @@ DELIMITER ;
 
 /*================================================*/
 
+DROP PROCEDURE IF EXISTS show_missing_programs_for_product;
+
+DELIMITER //
+    CREATE PROCEDURE show_missing_programs_for_product (IN pProductID INT)
+    BEGIN
+    SELECT * FROM wp_premio_program p WHERE p.program_id NOT IN 
+    (
+            SELECT program.`program_id` as program_id
+            FROM `wp_premio_product` as product
+            INNER JOIN `wp_premio_product_by_program` as product_by_program ON product.`product_id` = product_by_program.`product_id_fk`
+            INNER JOIN `wp_premio_program` as program ON product_by_program.`program_id_fk` = program.`program_id`
+            WHERE product.`product_id` = pProductID
+    );
+    END //
+DELIMITER ;
+
+/*================================================*/
+
 DROP PROCEDURE IF EXISTS show_selected_container;
 
 DELIMITER //
@@ -89,6 +107,15 @@ DELIMITER //
         DELETE FROM `wp_products_by_container` WHERE product_product_id_fk = pProductID; 
         DELETE FROM `wp_premio_product_by_program` WHERE product_id_fk = pProductID;
         DELETE FROM `wp_premio_product` WHERE product_id = pProductID;
+    END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS delete_products_by_program;
+
+DELIMITER //
+    CREATE PROCEDURE delete_products_by_program (IN pProductID INT)
+    BEGIN
+        DELETE FROM `wp_premio_product_by_program` WHERE product_id_fk = pProductID;
     END //
 DELIMITER ;
 

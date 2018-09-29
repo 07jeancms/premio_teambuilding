@@ -11,23 +11,44 @@ function premio_products_update() {
     $product_containers = $wpdb->get_results("SELECT * from $product_container_table");
     $programs = $wpdb->get_results("SELECT * from $program_table");    
 
-    $selected_container = $wpdb->get_row($wpdb->prepare(
-        "CALL show_selected_container('{$product_id}')"
-    ));
-
-    $selected_programs = $wpdb->get_row($wpdb->prepare(
-        "CALL show_selected_program('{$product_id}')"
-    ));
-
     $product_id = $_GET["product_id"];
     $name = $_POST["name"];
     $product_description = $_POST["product_description"];
     $post_product_container_id = $_POST['productContainerDpw'];
     $post_program_id = $_POST['programDpw'];
 
+    $selected_container = $wpdb->get_row($wpdb->prepare(
+        "CALL show_selected_container('{$product_id}')"
+    ));
+
+    $selected_programs = $wpdb->get_results($wpdb->prepare(
+        "CALL show_product_programs('{$product_id}')"
+    ));
+
+    $missing_programs_for_product = $wpdb->get_results($wpdb->prepare(
+        "CALL show_missing_programs_for_product('{$product_id}')"
+    ));    
+
     //update
     if (isset($_POST['update'])) {
-        $wpdb->query("CALL update_product('{$product_id}', '{$name}', '{$product_description}', '{$post_product_container_id}', '{$post_program_id}' )");
+        $wpdb->query("CALL update_product( '{$product_id}', '{$name}', '{$product_description}', '{$post_product_container_id}', '{$post_program_id}' )");
+
+        $wpdb->query("CALL delete_products_by_program( '{$product_id}' )");
+
+        if(!empty($_POST['checkbox'])) {
+            foreach($_POST["checkbox"] as $v) {
+                $program_id_to_int = (int)$v;
+
+                $wpdb->insert(
+                    $wpdb->prefix.'premio_product_by_program', 
+                    array(
+                        'product_by_program_id' => NULL,
+                        'program_id_fk' => $program_id_to_int, 
+                        'product_id_fk' => $product_id)
+                );
+            }
+        }
+
     }
     //delete
     else if (isset($_POST['delete'])) {
@@ -85,7 +106,13 @@ function premio_products_update() {
                     <tr>
                         <th>Programs</th>
                         <td>
-                            
+                            <?php foreach ($selected_programs as $program) { ?>
+                                <input name="checkbox[]" type="checkbox" value="<?php echo $program->program_id; ?>" checked> <?php echo $program->program_name; ?> <br>
+                            <?php } ?>
+
+                            <?php foreach ($missing_programs_for_product as $program) { ?>
+                                <input name="checkbox[]" type="checkbox" value="<?php echo $program->program_id; ?>"> <?php echo $program->name; ?> <br>
+                            <?php } ?>
                         </td>
                     </tr>
                 </table>
