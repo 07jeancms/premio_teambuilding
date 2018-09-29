@@ -45,7 +45,8 @@ DELIMITER //
         SELECT product.`product_id` as product_id, program.`program_id` as program_id, program.`name` as program_name
         FROM `wp_premio_product` as product
         INNER JOIN `wp_premio_product_by_program` as product_by_program ON product.`product_id` = product_by_program.`product_id_fk`
-        INNER JOIN `wp_premio_program` as program ON product_by_program.`program_id_fk` = program.`program_id`;
+        INNER JOIN `wp_premio_program` as program ON product_by_program.`program_id_fk` = program.`program_id`
+        where product.`product_id` = pPoductID;
     END //
 DELIMITER ;
 
@@ -127,21 +128,6 @@ DELIMITER //
                                     duration = pDuration, participation_type = pParticipationType, top_outcomes = pTopOutcomes, icon_labels = pIconLabels,
                                     video_url = pVideoURL 
                                     WHERE program_id = pProgramID;
-    END //
-DELIMITER ;
-
-/*================================================*/
-
-DROP PROCEDURE IF EXISTS show_selected_program;
-
-DELIMITER //
-    CREATE PROCEDURE show_selected_program (IN pProductID INT)
-    BEGIN
-        SELECT program.`program_id` as program_id, container.`name` as container_name
-        FROM `wp_premio_product` as product
-        INNER JOIN `wp_premio_product_by_program` as products_by_program ON product.`product_id` = products_by_program.`product_id_fk`
-        INNER JOIN `wp_premio_program` as program ON products_by_program.`program_id_fk` = program.`program_id`
-        WHERE product.`product_id` = pProductID;
     END //
 DELIMITER ;
 

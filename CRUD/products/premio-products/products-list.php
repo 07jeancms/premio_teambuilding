@@ -40,7 +40,7 @@ function premio_products_list() {
                     <td>
                     <?php 
                         $programs_by_product = $wpdb->get_results($wpdb->prepare(
-                            "CALL show_product_programs('{$product_id}')"
+                            "CALL show_product_programs('{$product->product_id}')"
                         ));
                     ?>
                         <?php foreach ($programs_by_product as $program) { ?>

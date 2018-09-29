@@ -15,7 +15,7 @@ function premio_products_update() {
         "CALL show_selected_container('{$product_id}')"
     ));
 
-    $selected_program = $wpdb->get_row($wpdb->prepare(
+    $selected_programs = $wpdb->get_row($wpdb->prepare(
         "CALL show_selected_program('{$product_id}')"
     ));
 
@@ -83,20 +83,9 @@ function premio_products_update() {
                         </td>
                     </tr>
                     <tr>
-                        <th>Program</th>
+                        <th>Programs</th>
                         <td>
-                            <select name="programDpw">
-                                <?php foreach ($programs as $program) { ?>
-                                    <option value="<?php echo $program->program_id; ?>" 
-                                        <?php 
-                                            if($program->program_id == $selected_program->program_id){
-                                                echo "selected";
-                                            } 
-                                        ?>>
-                                        <?php echo $program->name; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
+                            
                         </td>
                     </tr>
                 </table>
