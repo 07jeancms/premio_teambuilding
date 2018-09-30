@@ -174,10 +174,38 @@ DELIMITER //
 DELIMITER ;
 
 
+--    _____                                 
+--   |_   _|                                
+--     | |  _ __ ___   __ _  __ _  ___  ___ 
+--     | | | '_ ` _ \ / _` |/ _` |/ _ \/ __|
+--    _| |_| | | | | | (_| | (_| |  __/\__ \
+--   |_____|_| |_| |_|\__,_|\__, |\___||___/
+--                           __/ |          
+--                          |___/           
 
 
+DROP PROCEDURE IF EXISTS create_image;
 
+DELIMITER //
+    CREATE PROCEDURE create_image (IN pResourceID INT, IN pURL TEXT, IN pImageType INT, IN pGeneralImageType INT)
+    BEGIN
+        INSERT INTO wp_premio_image VALUES(NULL, pResourceID, pURL, pImageType, pGeneralImageType);
+    END //
+DELIMITER ;
 
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS show_images_info;
+
+DELIMITER //
+    CREATE PROCEDURE show_images_info()
+    BEGIN
+        SELECT image.`image_id`, image.`resource_id`, image.`url`, image_type.`name` as image_type, general_image_type.`name` as general_image_type
+        FROM `wp_premio_image` as image
+        INNER JOIN `wp_premio_image_type` as image_type ON image.`image_type_fk` = image_type.`id_image_type`
+        INNER JOIN `wp_premio_general_image_type` as general_image_type ON image.`general_image_type_fk` = general_image_type.`id_general_image_type`;
+    END //
+DELIMITER ;
 
 
 
