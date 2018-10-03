@@ -110,6 +110,8 @@ DELIMITER //
     END //
 DELIMITER ;
 
+/*================================================*/
+
 DROP PROCEDURE IF EXISTS delete_products_by_program;
 
 DELIMITER //
@@ -207,7 +209,53 @@ DELIMITER //
     END //
 DELIMITER ;
 
+/*================================================*/
 
+DROP PROCEDURE IF EXISTS show_selected_image_type;
 
+DELIMITER //
+    CREATE PROCEDURE show_selected_image_type (IN pImageID INT)
+    BEGIN
+        SELECT image_type.`id_image_type` as id, image_type.`name` as name
+        FROM `wp_premio_image` as image
+        INNER JOIN `wp_premio_image_type` as image_type ON image.`image_type_fk` = image_type.`id_image_type`
+        WHERE image.`image_id` = pImageID;
+    END //
+DELIMITER ;
 
+/*================================================*/
 
+DROP PROCEDURE IF EXISTS show_selected_general_image_type;
+
+DELIMITER //
+    CREATE PROCEDURE show_selected_general_image_type (IN pImageID INT)
+    BEGIN
+        SELECT general_image_type.`id_general_image_type` as id, general_image_type.`name` as name
+        FROM `wp_premio_image` as image
+        INNER JOIN `wp_premio_general_image_type` as general_image_type ON image.`general_image_type_fk` = general_image_type.`id_general_image_type`
+        WHERE image.`image_id` = pImageID;
+    END //
+DELIMITER ;
+
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS update_image;
+
+DELIMITER //
+    CREATE PROCEDURE update_image (IN pImageID INT, IN pResourceID INT, IN pURL TEXT, IN pImageTypeFK INT, IN pGeneralImageTypeFK INT)
+    BEGIN
+        UPDATE `wp_premio_image` SET resource_id = pResourceID, url = pURL, image_type_fk = pImageTypeFK, 
+                                        general_image_type_fk = pGeneralImageTypeFK WHERE image_id = pImageID;
+    END //
+DELIMITER ;
+
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS delete_image;
+
+DELIMITER //
+    CREATE PROCEDURE delete_image (IN pImageID INT)
+    BEGIN
+        DELETE FROM `wp_premio_image` WHERE image_id = pImageID;
+    END //
+DELIMITER ;
