@@ -1,6 +1,6 @@
 <?php
 
-function premio_products_update() {
+function premio_images_update() {
     global $wpdb;
 
     $table_name = $wpdb->prefix . "premio_image";
@@ -12,7 +12,7 @@ function premio_products_update() {
     $general_image_types = $wpdb->get_results("SELECT * from $general_image_type_table");    
 
     $image_id = $_GET["image_id"];
-    $resource_id = $_POST["resurce_id"];
+    $resource_id = $_POST["resource_id"];
     $url = $_POST["url"];
     $post_image_type_id = $_POST['imageTypeDpw'];
     $post_general_image_type_id = $_POST['generalImageTypeDpw'];
