@@ -40,7 +40,7 @@ function premio_images_modifymenu() {
 	add_menu_page('Images', //page title
 	'Images', //menu title
 	'manage_options', //capabilities
-	'premio_iamges_list', //menu slug
+	'premio_images_list', //menu slug
 	'premio_images_list' //function
 	);
 	

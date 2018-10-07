@@ -4,12 +4,11 @@ function premio_images_update() {
     global $wpdb;
 
     $table_name = $wpdb->prefix . "premio_image";
-
     $image_type_table = $wpdb->prefix . "premio_image_type";
     $general_image_type_table = $wpdb->prefix . "premio_general_image_type";
 
     $image_types = $wpdb->get_results("SELECT * from $image_type_table");
-    $general_image_types = $wpdb->get_results("SELECT * from $general_image_type_table");    
+    $general_image_types = $wpdb->get_results("SELECT * from $general_image_type_table");
 
     $image_id = $_GET["image_id"];
     $resource_id = $_POST["resource_id"];
@@ -21,9 +20,9 @@ function premio_images_update() {
         "CALL show_selected_image_type('{$image_id}')"
     ));
 
-    $selected_general_image_type = $wpdb->get_results($wpdb->prepare(
+    $selected_general_image_type = $wpdb->get_row($wpdb->prepare(
         "CALL show_selected_general_image_type('{$image_id}')"
-    ));  
+    ));
 
     //update
     if (isset($_POST['update'])) {
@@ -59,7 +58,7 @@ function premio_images_update() {
                 <table class='wp-list-table widefat fixed'>
                     <tr>
                         <th>RESOURCE_ID</th>
-                        <td><input type="text" name="resource_id" value="<?php echo $resource_id; ?>"/></td>
+                        <td><input type="number" name="resource_id" value="<?php echo $resource_id; ?>"/></td>
                     </tr>
                     <tr>
                         <th>URL</th>
@@ -70,7 +69,7 @@ function premio_images_update() {
                         <td>
                             <select name="imageTypeDpw">
                                 <?php foreach ($image_types as $image_type) { ?>
-                                    <option value="<?php echo $container->product_container_id; ?>" 
+                                    <option value="<?php echo $image_type->id_image_type; ?>" 
                                         <?php 
                                             if($image_type->id_image_type == $selected_image_type->id){
                                                 echo "selected";
