@@ -259,3 +259,25 @@ DELIMITER //
         DELETE FROM `wp_premio_image` WHERE image_id = pImageID;
     END //
 DELIMITER ;
+
+--    _____               _            _      _____            _        _                     
+--   |  __ \             | |          | |    / ____|          | |      (_)                    
+--   | |__) | __ ___   __| |_   _  ___| |_  | |     ___  _ __ | |_ __ _ _ _ __   ___ _ __ ___ 
+--   |  ___/ '__/ _ \ / _` | | | |/ __| __| | |    / _ \| '_ \| __/ _` | | '_ \ / _ \ '__/ __|
+--   | |   | | | (_) | (_| | |_| | (__| |_  | |___| (_) | | | | || (_| | | | | |  __/ |  \__ \
+--   |_|   |_|  \___/ \__,_|\__,_|\___|\__|  \_____\___/|_| |_|\__\__,_|_|_| |_|\___|_|  |___/
+--                                                                                            
+--                                                                                            
+
+DROP PROCEDURE IF EXISTS show_products_by_container;
+
+DELIMITER //
+    CREATE PROCEDURE show_products_by_container (IN pContainerID INT)
+    BEGIN
+        SELECT product.`product_id` as product_id, product_container.`product_container_id` as product_container_id, product.`name` as product_name
+        FROM `wp_premio_product` as product
+        INNER JOIN `wp_products_by_container` as product_by_container ON product.`product_id` = product_by_container.`product_product_id_fk`
+        INNER JOIN `wp_premio_product_container` as product_container ON product_by_container.`product_container_id_fk` = product_container.`product_container_id`
+        where product_container.`product_container_id` = pContainerID;
+    END //
+DELIMITER ;

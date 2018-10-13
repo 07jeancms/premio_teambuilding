@@ -21,6 +21,7 @@ function premio_products_container_list() {
             <tr>
                 <th class="manage-column ss-list-width">ID</th>
                 <th class="manage-column ss-list-width">Container</th>
+                <th class="manage-column ss-list-width">Products</th>
                 <th class="manage-column ss-list-width">Action</th>
                 <th>&nbsp;</th>
             </tr>
@@ -28,6 +29,16 @@ function premio_products_container_list() {
                 <tr>
                     <td class="manage-column ss-list-width"><?php echo $row->product_container_id; ?></td>
                     <td class="manage-column ss-list-width"><?php echo $row->name; ?></td>
+                    <td>
+                    <?php 
+                        $products_by_container = $wpdb->get_results($wpdb->prepare(
+                            "CALL show_products_by_container('{$row->product_container_id}')"
+                        ));
+                    ?>
+                        <?php foreach ($products_by_container as $product) { ?>
+                            <input name="checkbox[]" type="checkbox" value="<?php echo $product->product_id; ?>" disabled> <?php echo $product->product_name; ?> <br>
+                        <?php } ?>
+                    </td>
                     <td><a href="<?php echo admin_url('admin.php?page=premio_products_container_update&product_container_id=' . $row->product_container_id); ?>">Update</a></td>
                 </tr>
             <?php } ?>
