@@ -30,7 +30,7 @@ function premio_products_container_create() {
         </form>
         <div class="tablenav top">
             <div class="alignleft actions">
-                <a href="<?php echo admin_url('admin.php?page=premio_product_container_list'); ?>">Back to Product Containers</a>
+                <a href="<?php echo admin_url('admin.php?page=premio_products_container_list'); ?>">Back to Product Containers</a>
             </div>
             <br class="clear">
         </div>
