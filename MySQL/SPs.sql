@@ -281,3 +281,44 @@ DELIMITER //
         where product_container.`product_container_id` = pContainerID;
     END //
 DELIMITER ;
+
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS missing_products_for_container;
+
+DELIMITER //
+    CREATE PROCEDURE missing_products_for_container (IN pContainerID INT)
+    BEGIN
+    SELECT * FROM wp_premio_product p WHERE p.product_id NOT IN 
+    (
+            SELECT product.`product_id` as product_id
+            FROM `wp_premio_product` as product
+            INNER JOIN `wp_products_by_container` as product_by_container ON product.`product_id` = product_by_container.`product_product_id_fk`
+            INNER JOIN `wp_premio_product_container` as product_container ON product_by_container.`product_container_id_fk` = product_container.`product_container_id`
+            WHERE product_container.`product_container_id` = pContainerID
+    );
+    END //
+DELIMITER ;
+
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS delete_products_by_container;
+
+DELIMITER //
+    CREATE PROCEDURE delete_products_by_container (IN pContainerID INT)
+    BEGIN
+        DELETE FROM `wp_products_by_container` WHERE product_container_id_fk = pContainerID;
+    END //
+DELIMITER ;
+
+/*================================================*/
+
+DROP PROCEDURE IF EXISTS delete_product_container;
+
+DELIMITER //
+    CREATE PROCEDURE delete_product_container (IN pContainerID INT)
+    BEGIN
+        DELETE FROM `wp_products_by_container` WHERE product_container_id_fk = pContainerID; 
+        DELETE FROM `wp_premio_product_container` WHERE product_container_id = pContainerID;
+    END //
+DELIMITER ;
